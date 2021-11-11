@@ -215,11 +215,11 @@ That's pretty much done with the code. Now we setup our API gateway
 
 ## API gateway
 
-![image-20211111115621357](C:\Projects\dotnet_api\docs\README.assets\image-20211111115621357.png)
+![image-20211111115621357](./README.assets/image-20211111115621357.png)
 
 This is my API gateway setup. We create `Resources` for each route path, and `Action` for each  HTTP method
 
-![image-20211111115748672](C:\Projects\dotnet_api\docs\README.assets\image-20211111115748672.png)
+![image-20211111115748672](./README.assets/image-20211111115748672.png)
 
 **Note:** remember to click `Deploy API` once you're done.
 
@@ -227,19 +227,19 @@ This is my API gateway setup. We create `Resources` for each route path, and `Ac
 
 We always check **Use Lambda Proxy integration**. This gives us a lot of information from the request side including IP, browser and so on.
 
-![image-20211111115832525](C:\Projects\dotnet_api\docs\README.assets\image-20211111115832525.png)
+![image-20211111115832525](./README.assets/image-20211111115832525.png)
 
 ## Explanation for the subpath replacement in `LambdaEntry.cs`
 
 **Some gotcha**: When using the "Add Trigger" in lambda function, API gateway will create a path for your function:
 
-![image-20211111120150763](C:\Projects\dotnet_api\docs\README.assets\image-20211111120150763.png)
+![image-20211111120150763](./README.assets/image-20211111120150763.png)
 
 
 
 When doing this, the API gateway will create a sub-route with the `function name`. For example:
 
-![image-20211111120354851](C:\Projects\dotnet_api\docs\README.assets\image-20211111120354851.png)
+![image-20211111120354851](./README.assets/image-20211111120354851.png)
 
 Therefore, if your api is programmed for `localhost:5000/weatherforecast`, the path from api gateway will actually be `/aws_lambda_cs_net_5/weatherforecast`. Which will return back a **404 Not Found**.
 
@@ -249,7 +249,7 @@ Therefore, if your api is programmed for `localhost:5000/weatherforecast`, the p
 
 1. Create API Gateway by hand, make sure it going towards this format (no function name in the hierarchy):
 
-   ![image-20211111120645902](C:\Projects\dotnet_api\docs\README.assets\image-20211111120645902.png)
+   ![image-20211111120645902](./README.assets/image-20211111120645902.png)
 
 2. If you're too deep in the mud and not willing to recreate everything by hand, override `MarshallRequest` and try to intercept the `APIGatewayProxyRequest.path` like I did:
 
