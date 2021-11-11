@@ -1,0 +1,5 @@
+// For testing with Mock Lambda test tool only
+{
+"httpMethod":"get",
+"path":"/weatherforecast"
+}
